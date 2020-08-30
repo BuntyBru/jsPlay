@@ -1,6 +1,5 @@
-
-
-const list = document.querySelector('#book-list ul');
+document.addEventListener('DOMContentLoaded',() => {
+	const list = document.querySelector('#book-list ul');
 
 //deletion 
 list.addEventListener('click',(e)=>{
@@ -68,5 +67,43 @@ searchForm.addEventListener('keyup',(e)=>{
 	})
 
 })
+
+//sorting books 
+
+const sortBtn = document.querySelectorAll('header button')[0];
+console.log(sortBtn);
+
+sortBtn.addEventListener('click', ()=>{
+
+	let books  = document.querySelectorAll('li');
+	let items = document.querySelector('ul').childNodes;
+	//console.log("==>",items)
+	let itemArray=[];
+	items.forEach( x => {
+		if(x.nodeType == 1)
+		{
+
+			itemArray.push(x)
+			console.log(x.querySelector('.name').innerHTML)
+		}
+	})
+
+//sorting
+	itemArray.sort(function(a, b) {
+  return a.querySelector('.name').innerHTML == b.querySelector('.name').innerHTML
+          ? 0
+          : (a.querySelector('.name').innerHTML > b.querySelector('.name').innerHTML ? 1 : -1);
+});
+
+console.log(itemArray)
+	for (i = 0; i < itemArray.length; ++i) {
+  document.querySelector('ul').append(itemArray[i]);
+}
+})
+
+
+
+})
+
 
 
